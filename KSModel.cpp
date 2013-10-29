@@ -1,10 +1,4 @@
-
 #include "KSModel.h"
-
-
-
-
-
 
 //A default constructor. Doesn't do anything interesting. All parameters are set to zero, buffer is
 //filled with noise.
@@ -23,7 +17,7 @@ KarplusStrongString::KarplusStrongString() {
 //A constructor that allows for feedback specification
 KarplusStrongString::KarplusStrongString(double pitch, double amp, double fb) {
   front_ = 0;
-  delay_ = (int) (SAMPLE_RATE / static_cast<double>(pitch));
+  delay_ = static_cast<int>(SAMPLE_RATE / (1.0 * pitch));
   double amplitude = std::max(0.001, amp);
   for (int i = 0; i < kStandardBufferLength; ++i) {
     samples_[i] = amplitude * (rand() / (1.0 * RAND_MAX) * 2.0 - 1.0);
@@ -35,7 +29,6 @@ KarplusStrongString::KarplusStrongString(double pitch, double amp, double fb) {
   note_length_ = 0;
 
 }
-
 
 KarplusStrongString::~KarplusStrongString() {
 }
@@ -65,7 +58,7 @@ int KarplusStrongString::advance(double add_to_sample) {
   }
 }
 
-//Pulls a sample from the sample array with offset current - i. i can be positive or negative.
+//Pulls current sample from the location of the read pointer
 double KarplusStrongString::current(void) {
   int which_sample = (back_ + kStandardBufferLength) % kStandardBufferLength;
 
@@ -79,7 +72,7 @@ double KarplusStrongString::current(void) {
 
 }
 
-//Advances the read and write pointer without any feedback.
+//Pulls current sample from the location of the read pointer
 int KarplusStrongString::advance(void) {
   return KarplusStrongString::advance(0);
 }
@@ -161,8 +154,8 @@ double KarplusStrongInstrument::play() {
   return sum;
 }
 
+//Sets and activates a filterback for this instrument
 void KarplusStrongInstrument::set_filter_bank(FilterBank *f) {
   filter_ = f;
 
 }
-

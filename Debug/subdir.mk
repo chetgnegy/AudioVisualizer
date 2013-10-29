@@ -3,19 +3,35 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+O_SRCS += \
+../RtAudio.o \
+../RtMidi.o \
+../fft.o \
+../graphics.o \
+../smellovision.o 
+
 CPP_SRCS += \
 ../RtAudio.cpp \
 ../RtMidi.cpp \
+../complex.cpp \
+../fft.cpp \
+../graphics.cpp \
 ../smellovision.cpp 
 
 OBJS += \
 ./RtAudio.o \
 ./RtMidi.o \
+./complex.o \
+./fft.o \
+./graphics.o \
 ./smellovision.o 
 
 CPP_DEPS += \
 ./RtAudio.d \
 ./RtMidi.d \
+./complex.d \
+./fft.d \
+./graphics.d \
 ./smellovision.d 
 
 

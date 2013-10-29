@@ -66,6 +66,11 @@ class complex {
   double normsq() const {
     return m_re * m_re + m_im * m_im;
   }
+  //   Norm
+  double angle() const {
+    return ::atan(m_im / m_re);
+  }
+  
   //   Arithmetic operations
   complex operator+(const complex& other) const {
     return complex(m_re + other.m_re, m_im + other.m_im);
